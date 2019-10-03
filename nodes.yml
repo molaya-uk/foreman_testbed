@@ -1,0 +1,35 @@
+---
+- hostname: foreman.local.com
+  box: 'centos/7'
+  ip: '10.11.0.10'
+  ports:
+    - host: 443
+      guest: 443
+  provisioners:
+    - type: 'shell'
+      src: 'hosts.sh'
+    - type: 'shell'
+      src: 'foreman_bootstrap.sh'
+
+- hostname: node1.local.com
+  box: 'centos/7'
+  ip: '10.11.0.11'
+  provisioners:
+    - type: 'shell'
+      src: 'hosts.sh'
+    - type: 'shell'
+      src: 'agent_bootstrap.sh'
+    - type: 'shell'
+      src: 'agent_puppet_apply.sh'
+
+- hostname: node2.local.com
+  box: 'centos/7'
+  ip: '10.11.0.12'
+  provisioners:
+    - type: 'shell'
+      src: 'hosts.sh'
+    - type: 'shell'
+      src: 'agent_bootstrap.sh'
+    - type: 'shell'
+      src: 'agent_puppet_apply.sh'
+
